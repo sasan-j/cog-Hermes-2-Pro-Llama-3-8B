@@ -101,12 +101,12 @@ class VLLMPipeline:
         )
 
         generation_length = 0
-        text = self.tokenizer.apply_chat_template(
-            prompt,
-            tokenize=False,
-            add_generation_prompt=True
-        )
-        async for request_output in self.generate_stream(text, sampling_params):
+        # text = self.tokenizer.apply_chat_template(
+        #     prompt,
+        #     tokenize=False,
+        #     add_generation_prompt=True
+        # )
+        async for request_output in self.generate_stream(prompt, sampling_params):
             assert len(request_output.outputs) == 1
             generated_text = request_output.outputs[0].text
             if incremental_generation:
